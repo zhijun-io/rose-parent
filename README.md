@@ -4,13 +4,19 @@ Optional parent POM that provides shared configuration for Maven Central publish
 
 ## Usage
 
-Projects can optionally inherit from this parent to get pre-configured:
+Inheriting from this parent gives you two things.
+
+Activated by the `release` profile (`./mvnw deploy -Prelease`):
 
 - `central-publishing-maven-plugin` with `autoPublish=true`
 - `maven-gpg-plugin` with loopback pinentry for CI/CD
 - `maven-source-plugin` and `maven-javadoc-plugin`
-- `flatten-maven-plugin` for CI-friendly versioning
-- `spring-javaformat-maven-plugin` for consistent code formatting
+
+Managed, so declared and configured by the child project without repeating a version:
+
+- `maven-compiler-plugin`, `maven-surefire-plugin`, `maven-jar-plugin`, `maven-deploy-plugin`
+- `flatten-maven-plugin` — only useful if the project actually uses `${revision}`-style CI-friendly versions
+- `spring-javaformat-maven-plugin`
 
 ### Option 1: Inherit as Parent
 
@@ -18,7 +24,7 @@ Projects can optionally inherit from this parent to get pre-configured:
 <parent>
     <groupId>io.github.zhijun-io</groupId>
     <artifactId>rose-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1</version>            <!-- use the released version, not 0.0.1-SNAPSHOT -->
 </parent>
 ```
 
@@ -36,19 +42,24 @@ The `release` profile activates Maven Central publishing with GPG signing:
 ./mvnw deploy -Prelease
 ```
 
+Snapshots go to the Sonatype snapshot repository declared in `distributionManagement`; that is how this
+parent POM itself becomes resolvable for the projects that inherit from it.
+
 ### Plugin Management
 
-All plugin versions are centrally managed:
+Versions are pinned through properties named `<artifactId>.version` and currently resolve to:
 
 | Plugin | Version |
 |--------|---------|
 | maven-compiler-plugin | 3.11.0 |
 | maven-surefire-plugin | 3.1.2 |
+| maven-jar-plugin | 3.3.0 |
+| maven-deploy-plugin | 3.1.1 |
 | maven-source-plugin | 3.3.0 |
 | maven-javadoc-plugin | 3.6.0 |
 | maven-gpg-plugin | 3.2.7 |
-| flatten-maven-plugin | 1.5.0 |
-| central-publishing-maven-plugin | 0.9.0 |
+| flatten-maven-plugin | 1.6.0 |
+| central-publishing-maven-plugin | 0.10.0 |
 | spring-javaformat-maven-plugin | 0.0.43 |
 
 ### Java Version
@@ -61,7 +72,11 @@ Default Java version is 17. Override with:
 </properties>
 ```
 
-## Required Secrets
+## CI and Required Secrets
+
+`.github/workflows` calls the shared `spring-ai-community/community-workflows` reusable workflows.
+`release.yml` grants `permissions: contents: write` because that workflow pushes the release tag and the
+development-version bump back to `main`.
 
 For Maven Central publishing, configure these secrets:
 
