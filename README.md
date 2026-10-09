@@ -74,7 +74,7 @@ Default Java version is 17. Override with:
 
 ## CI and Required Secrets
 
-`.github/workflows` calls the shared `spring-ai-community/community-workflows` reusable workflows.
+`.github/workflows` calls the shared `zhijun-io/github-workflows` reusable workflows.
 `release.yml` grants `permissions: contents: write` because that workflow pushes the release tag and the
 development-version bump back to `main`.
 
