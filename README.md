@@ -1,4 +1,4 @@
-# Spring AI Community Parent POM
+# Rose Parent POM
 
 Optional parent POM that provides shared configuration for Maven Central publishing.
 
@@ -16,9 +16,9 @@ Projects can optionally inherit from this parent to get pre-configured:
 
 ```xml
 <parent>
-    <groupId>org.springaicommunity</groupId>
-    <artifactId>spring-ai-community-parent</artifactId>
-    <version>1.0.0</version>
+    <groupId>io.github.zhijun-io</groupId>
+    <artifactId>rose-parent</artifactId>
+    <version>0.0.1</version>
 </parent>
 ```
 
@@ -80,4 +80,4 @@ This parent POM is **optional**. Projects can:
 2. **Partial adoption**: Copy specific plugin configurations
 3. **Independent**: Maintain their own complete configuration
 
-All Spring AI Community projects work with or without this parent.
+All Rose projects work with or without this parent.
