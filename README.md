@@ -88,7 +88,7 @@ For Maven Central publishing, configure these secrets:
 |--------|-------------|
 | `MAVEN_USERNAME` | Sonatype Portal username |
 | `MAVEN_PASSWORD` | Sonatype Portal token |
-| `GPG_SECRET_KEY` | ASCII-armored GPG private key |
+| `MAVEN_GPG_PRIVATE_KEY` | ASCII-armored GPG private key |
 | `GPG_PASSPHRASE` | GPG passphrase |
 
 ## Opt-in Philosophy
