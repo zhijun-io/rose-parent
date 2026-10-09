@@ -1,5 +1,9 @@
 # Rose Parent POM
 
+[![CI](https://github.com/zhijun-io/rose-parent/actions/workflows/ci.yml/badge.svg)](https://github.com/zhijun-io/rose-parent/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://adoptium.net/)
+
 Optional parent POM that provides shared configuration for Maven Central publishing.
 
 ## Usage
@@ -24,7 +28,7 @@ Managed, so declared and configured by the child project without repeating a ver
 <parent>
     <groupId>io.github.zhijun-io</groupId>
     <artifactId>rose-parent</artifactId>
-    <version>0.0.1</version>            <!-- use the released version, not 0.0.1-SNAPSHOT -->
+    <version>0.0.3</version>           
 </parent>
 ```
 
